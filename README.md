@@ -201,4 +201,45 @@ I/O List (پیش‌نویس)
 - جایگذاری PSVها، هات-بای‌پس و اندازه سایزینگ لاین‌ها پس از دریافت دیتای فرآیندی نهایی می‌شود.
 
 
+ریشه پروژه
+ساختار کلی پوشه‌ها و فایل‌ها:
+
+```
+pfd-pid/
+├─ README.md
+├─ PFD_SGT600_Fuel_Control.md
+├─ PID_SGT600_Fuel_Control.md
+├─ tools/
+│  ├─ requirements.txt
+│  └─ generate_dxf.py
+└─ cad/                ← پس از اجرای اسکریپت ساخته می‌شود
+   ├─ PFD_SGT600_Fuel_Control.dxf   (تولید می‌شود)
+   └─ PID_SGT600_Fuel_Control.dxf   (تولید می‌شود)
+```
+
+تولید فایل‌های AutoCAD (DXF)
+برای دریافت خروجی قابل باز شدن در AutoCAD/LibreCAD، اسکریپت DXF آماده شده است:
+
+۱) نصب پیش‌نیاز
+```powershell
+python -m venv .venv
+.\\.venv\\Scripts\\Activate.ps1
+pip install -r tools\\requirements.txt
+```
+
+۲) تولید DXFها
+```powershell
+python tools\\generate_dxf.py
+```
+
+۳) مسیر خروجی
+- فایل‌ها در پوشه `cad\\` ایجاد می‌شوند:
+  - `cad\\PFD_SGT600_Fuel_Control.dxf`
+  - `cad\\PID_SGT600_Fuel_Control.dxf`
+
+نکات
+- این DXFها شماتیک مهندسی برای شروع کار اتوکد هستند (بلوک‌ها/لایه‌ها ساده). می‌توانیم نمادهای استاندارد ISA، لایه‌بندی، بلاک‌های ابزار و Title Block را مطابق استاندارد کارفرما سفارشی کنیم.
+- در صورت نیاز به فرمت DWG، می‌توانید DXF را در AutoCAD با Save As به DWG تبدیل کنید.
+
+
 
