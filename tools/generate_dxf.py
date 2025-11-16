@@ -9,14 +9,40 @@ from ezdxf.enums import TextEntityAlignment
 OUTPUT_DIR = Path(__file__).resolve().parent.parent / "cad"
 
 
+def _place_text(text_entity: Text, pos: tuple[float, float], center: bool = False) -> None:
+	"""
+	Compatibility helper for ezdxf versions that may not support Text.set_pos.
+	Positions text at pos, with optional center alignment if supported.
+	"""
+	try:
+		# Prefer modern API if available
+		if hasattr(text_entity, "set_pos"):
+			align = TextEntityAlignment.MIDDLE_CENTER if center else TextEntityAlignment.LEFT
+			text_entity.set_pos(pos, align=align)  # type: ignore[attr-defined]
+			return
+	except Exception:
+		pass
+
+	# Fallback: basic insert point (no alignment guarantees)
+	text_entity.dxf.insert = pos
+	# Best-effort center hint for some versions
+	if center and hasattr(text_entity.dxf, "halign") and hasattr(text_entity.dxf, "valign"):
+		try:
+			text_entity.dxf.halign = 1  # center
+			text_entity.dxf.valign = 1  # middle
+		except Exception:
+			pass
+
+
 def add_title(msp, title: str, x: float, y: float):
 	"""
 	Draws a centered title text at (x, y).
 	"""
-	msp.add_text(
+	t = msp.add_text(
 		title,
 		dxfattribs={"height": 10},
-	).set_pos((x, y), align=TextEntityAlignment.MIDDLE_CENTER)
+	)
+	_place_text(t, (x, y), center=True)
 
 
 def add_box(msp, insert, size, text: str):
@@ -29,7 +55,8 @@ def add_box(msp, insert, size, text: str):
 	x, y = insert
 	w, h = size
 	msp.add_lwpolyline([(x, y), (x + w, y), (x + w, y + h), (x, y + h), (x, y)], dxfattribs={"closed": True})
-	msp.add_text(text, dxfattribs={"height": 4}).set_pos((x + w / 2, y + h / 2), align=TextEntityAlignment.MIDDLE_CENTER)
+	t = msp.add_text(text, dxfattribs={"height": 4})
+	_place_text(t, (x + w / 2, y + h / 2), center=True)
 
 
 def add_conn(msp, p1, p2, label: str | None = None, arrow: bool = False):
@@ -44,7 +71,8 @@ def add_conn(msp, p1, p2, label: str | None = None, arrow: bool = False):
 	if label:
 		lx = (p1[0] + p2[0]) / 2
 		ly = (p1[1] + p2[1]) / 2 + 2
-		msp.add_text(label, dxfattribs={"height": 3}).set_pos((lx, ly), align=TextEntityAlignment.MIDDLE_CENTER)
+		t = msp.add_text(label, dxfattribs={"height": 3})
+		_place_text(t, (lx, ly), center=True)
 
 
 def generate_pfd(path: Path):
@@ -93,8 +121,10 @@ def generate_pfd(path: Path):
 	add_conn(msp, (300, 90), (330, 90), "To GT Combustion", True)
 
 	# Measurements (conceptual callouts)
-	msp.add_text("PT-001 @ Filter Outlet", dxfattribs={"height": 3}).set_pos((95, 185))
-	msp.add_text("TT-001 @ KO Outlet", dxfattribs={"height": 3}).set_pos((155, 185))
+	t1 = msp.add_text("PT-001 @ Filter Outlet", dxfattribs={"height": 3})
+	_place_text(t1, (95, 185))
+	t2 = msp.add_text("TT-001 @ KO Outlet", dxfattribs={"height": 3})
+	_place_text(t2, (155, 185))
 
 	doc.saveas(str(path))
 
@@ -112,8 +142,10 @@ def generate_pid(path: Path):
 	add_conn(msp, (110, 170), (120, 170), None, arrow=True)
 
 	# PT/TT upstream
-	msp.add_text("PT-001", dxfattribs={"height": 3}).set_pos((95, 185), align=TextEntityAlignment.MIDDLE_CENTER)
-	msp.add_text("TT-001", dxfattribs={"height": 3}).set_pos((135, 185), align=TextEntityAlignment.MIDDLE_CENTER)
+	tpt = msp.add_text("PT-001", dxfattribs={"height": 3})
+	_place_text(tpt, (95, 185), center=True)
+	ttt = msp.add_text("TT-001", dxfattribs={"height": 3})
+	_place_text(ttt, (135, 185), center=True)
 
 	# Split
 	add_box(msp, (180, 160), (40, 20), "TEE Split")
@@ -143,15 +175,19 @@ def generate_pid(path: Path):
 
 	# Header and PT-002
 	add_box(msp, (260, 80), (60, 60), "Mixing Header")
-	msp.add_text("PT-002", dxfattribs={"height": 3}).set_pos((290, 145), align=TextEntityAlignment.MIDDLE_CENTER)
+	tpt2 = msp.add_text("PT-002", dxfattribs={"height": 3})
+	_place_text(tpt2, (290, 145), center=True)
 	add_conn(msp, (240, 119), (260, 119), None, arrow=True)
 	add_conn(msp, (240, 79), (260, 79), None, arrow=True)
 	add_conn(msp, (320, 110), (350, 110), "To GT", True)
 
 	# Control/Safety callouts
-	msp.add_text("AO: FCV-PR/MN-Command", dxfattribs={"height": 3}).set_pos((60, 30))
-	msp.add_text("DO: SDV Close/Open, SOV Trip", dxfattribs={"height": 3}).set_pos((60, 24))
-	msp.add_text("DI: LS Open/Close, Trip Status", dxfattribs={"height": 3}).set_pos((60, 18))
+	c1 = msp.add_text("AO: FCV-PR/MN-Command", dxfattribs={"height": 3})
+	_place_text(c1, (60, 30))
+	c2 = msp.add_text("DO: SDV Close/Open, SOV Trip", dxfattribs={"height": 3})
+	_place_text(c2, (60, 24))
+	c3 = msp.add_text("DI: LS Open/Close, Trip Status", dxfattribs={"height": 3})
+	_place_text(c3, (60, 18))
 
 	doc.saveas(str(path))
 
