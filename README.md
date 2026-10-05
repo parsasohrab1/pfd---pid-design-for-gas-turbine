@@ -1,49 +1,49 @@
-عنوان: بسته اولیه PFD و P&ID — سامانه عملگر و کنترل ولو سوخت توربین زیمنس SGT600/IGT25 (جایگزین Heinzmann)
+Title: Initial PFD and P&ID Package — Siemens SGT600/IGT25 Turbine Fuel Valve Actuator and Control System (Heinzmann Replacement)
 
-شرح کوتاه
-این بسته حاوی پیش‌نویس‌های اولیه PFD و P&ID برای مدار سوخت (Main & Primary) با تمرکز بر عملگر کنترل ولو و متعلقات الکتریکال/ابزاردقیق جهت نصب بر روی توربین‌های زیمنس SGT600/IGT25 است. این نسخه برای شروع مهندسی (Class-Concept/FEED) تهیه شده و نیازمند تکمیل داده‌های فرآیندی و اینترفیس‌ها است.
+Short description
+This package contains initial PFD and P&ID drafts for the fuel circuit (Main & Primary), focusing on the control valve actuator and its electrical/instrumentation accessories for installation on Siemens SGT600/IGT25 turbines. This version is prepared for starting engineering (Class-Concept/FEED) and requires completion with process data and interfaces.
 
-فرضیات کلیدی (برای نسخه اولیه)
-- سوخت: گاز طبیعی خشک، بازه فشار 20–70 barg (ASME Class تناسبی با سایت)، دمای 0–60°C
-- دو مسیر سوخت Primary و Main با بای‌پس‌های سرویس/ایمن
-- عملگر کنترل ولو الکتریکی/الکتروهیدرولیک (با گواهی Ex d/Ex e یا معادل)
-- حلقه کنترلی سرعت/بار از PLC/ترباین کنترلر موجود (TGC)، استاندارد سیگنال 4–20 mA یا Fieldbus
-- سطح SIL هدف برای حلقه ESD: SIL2 (طبق IEC 61511/61508 — نیاز به تایید کارفرما)
-- مناطق خطر: Zone 1 یا Zone 2 (تایید ATEX/IECEx تجهیزات ابزاردقیق و درایوها)
+Key assumptions (for the initial version)
+- Fuel: dry natural gas, pressure range 20–70 barg (ASME Class proportional to the site), temperature 0–60°C
+- Two fuel paths, Primary and Main, with service/safety bypasses
+- Electric/electro-hydraulic control valve actuator (with Ex d/Ex e certification or equivalent)
+- Speed/load control loop from the existing PLC/turbine controller (TGC), 4–20 mA or Fieldbus signal standard
+- Target SIL level for the ESD loop: SIL2 (per IEC 61511/61508 — requires client confirmation)
+- Hazardous areas: Zone 1 or Zone 2 (ATEX/IECEx confirmation of instrumentation and drives)
 
-استانداردهای مرجع
-- IEC 60534 (کنترل ولوها)، IEC 61800 (درایوها)، ISO 6336 و AGMA 2001 (چرخ‌دنده — در صورت وجود در عملگر)
-- API 6D/598 برای تست ولوها (در صورت کاربرد)، ISA-5.1 برای نمادگذاری و تگینگ
-- IEC 60079 (Ex)، IEC 61511/61508 (SIS/SIL) — برای طراحی نهایی ایمنی
+Reference standards
+- IEC 60534 (control valves), IEC 61800 (drives), ISO 6336 and AGMA 2001 (gearing — if present in the actuator)
+- API 6D/598 for valve testing (where applicable), ISA-5.1 for symbols and tagging
+- IEC 60079 (Ex), IEC 61511/61508 (SIS/SIL) — for final safety design
 
-اقلام موجود در بسته
-- PFD_SGT600_Fuel_Control.md — نمودار جریان فرآیند (Mermaid)
-- PID_SGT600_Fuel_Control.md — نمودار لوله‌کشی و ابزار دقیق (Mermaid + لیست‌ها)
+Items in the package
+- PFD_SGT600_Fuel_Control.md — process flow diagram (Mermaid)
+- PID_SGT600_Fuel_Control.md — piping and instrumentation diagram (Mermaid + lists)
 
-چک‌لیست داده‌های لازم جهت نهایی‌سازی
-1) شرایط فرآیندی
-   - فشار/دبی/دمای ورودی و خروجی سوخت (Min/Norm/Max)
-   - کلاس فلنج‌ها، MOP، PSV set-pointها (در صورت وجود)
-   - خورندگی/آلودگی، فیلتراسیون موردنیاز
-2) مشخصات ولو و عملگر
-   - Cv موردنیاز، Linear/Equal%, Seat/Trim، Leakage Class، Fail Action
-   - نوع عملگر (الکتریکی/الکتروهیدرولیک)، زمان حرکت، گشتاور/نیروی لازم، حفاظت Ex و IP
-   - نیاز به ESD مستقل و موقعیت Fail (Close/Open/Last)
-3) ابزاردقیق و کنترل
-   - سنسورها (PT/TT/FT/DP) و کلاس دقت/Ex، موقعیت نصب
-   - سیگنال‌های I/O (آنالوگ/دیجیتال/فیلدباس)، منبع تغذیه، کابلیگ
-   - فلسفه کنترلی (Speed/Load/Pressure control) و interlockها
-4) الزامات ایمنی و SIL
-   - SIFها، آزمون‌پذیری، نفرین/اثرات مد شکست، پوشش تست‌های Proof
-5) مکانیک و پایپینگ
-   - متریال لاین‌ها، سایزینگ لاین‌ها، کلاس عایق/تکیه‌گاه
-   - اسپولهای جدید/تغییرات و فضای نصب/دسترسی
-6) اسناد و الزامات سایت
-   - Zone Classification، کابل‌رِوت‌ها، Junction Box/Marshall
-   - استانداردهای کارفرما برای تگینگ، رنگ، لایه‌بندی نقشه
+Checklist of data required for finalization
+1) Process conditions
+   - Fuel inlet and outlet pressure/flow/temperature (Min/Norm/Max)
+   - Flange classes, MOP, PSV set-points (if any)
+   - Corrosiveness/contamination, required filtration
+2) Valve and actuator specifications
+   - Required Cv, Linear/Equal%, Seat/Trim, Leakage Class, Fail Action
+   - Actuator type (electric/electro-hydraulic), travel time, required torque/force, Ex and IP protection
+   - Need for independent ESD and the Fail position (Close/Open/Last)
+3) Instrumentation and control
+   - Sensors (PT/TT/FT/DP) and accuracy/Ex class, installation location
+   - I/O signals (analog/digital/fieldbus), power supply, cabling
+   - Control philosophy (Speed/Load/Pressure control) and interlocks
+4) Safety and SIL requirements
+   - SIFs, testability, failure mode effects, Proof test coverage
+5) Mechanical and piping
+   - Line materials, line sizing, insulation/support class
+   - New spools/changes and installation space/access
+6) Documents and site requirements
+   - Zone Classification, cable routes, Junction Box/Marshall
+   - Client standards for tagging, color, drawing layering
 
-توجه
-این اسناد پیش‌نویس مفهومی هستند و برای تولید/ساخت نهایی، نیازمند به‌روزرسانی با داده‌های واقعی سایت و تایید کارفرما می‌باشند. 
+Notice
+These documents are conceptual drafts and require updating with real site data and client approval for final production/construction.
 
 
 
@@ -51,12 +51,12 @@
 
 # pfd
 design for production
-عنوان: PFD — مدار سوخت و عملگر کنترل ولو (SGT600/IGT25)
+Title: PFD — Fuel Circuit and Control Valve Actuator (SGT600/IGT25)
 
-هدف
-نمایش ساده جریان فرآیند سوخت، نقاط اندازه‌گیری کلیدی و جایگاه عملگر کنترل ولو برای مسیرهای Primary و Main.
+Purpose
+A simple display of the fuel process flow, key measurement points and the position of the control valve actuator for the Primary and Main paths.
 
-نمودار جریان فرآیند (Mermaid)
+Process Flow Diagram (Mermaid)
 
 ```mermaid
 flowchart LR
@@ -87,35 +87,35 @@ flowchart LR
     MIX --> T[GTC/Turbine Combustion System]
 ```
 
-جداول جریان و اندازه‌گیری‌ها (پیش‌نویس)
-- جریان نامی: 100% بار — بر اساس دیتاشیت توربین (نیازمند داده واقعی)
-- محدوده فلو: Min/TurnDown تا Max (تعیین Cv نهایی)
-- نقاط اندازه‌گیری: Pressure upstream/downstream، Flow (per line)، Temperature
+Flow and measurement tables (draft)
+- Nominal flow: 100% load — based on the turbine datasheet (real data required)
+- Flow range: Min/TurnDown to Max (determines final Cv)
+- Measurement points: Pressure upstream/downstream, Flow (per line), Temperature
 
-اقلام اصلی PFD
-- واحد فیلتراسیون/کوآلسر برای حذف مایعات/ذرات
-- جداکننده/درام ضربه برای محافظت از ولوها و احتراق
-- Heater/Conditioning در صورت نیاز (دما/چگالی)
-- انشعاب Primary/Main، ولوهای کنترل (Actuated) و ادغام به هدر مختلط
-- ابزارهای FT/PT/TT در نقاط کلیدی
+Main PFD items
+- Filtration/coalescer unit for removing liquids/particles
+- Separator/surge drum to protect valves and combustion
+- Heater/Conditioning if needed (temperature/density)
+- Primary/Main branch, control valves (Actuated) and merging into the mixed header
+- FT/PT/TT instruments at key points
 
-یادداشت‌ها
-- مقادیر دقیق فلو/فشار/دما و انتخاب Heater اختیاری است و با داده‌های سایت جایگزین می‌شود.
-- فلسفه خاموشی ایمن (Fail Close روی هر دو خط) در نسخه اولیه فرض شده است.
+Notes
+- Exact flow/pressure/temperature values and the Heater selection are optional and will be replaced with site data.
+- The safe shutdown philosophy (Fail Close on both lines) is assumed in the initial version.
 
 
 PID
-عنوان: P&ID — مدار سوخت و عملگر کنترل ولو (SGT600/IGT25)
+Title: P&ID — Fuel Circuit and Control Valve Actuator (SGT600/IGT25)
 
-هدف
-نمایش لاین‌ها، ولوها، ابزار دقیق، حلقه‌های کنترلی و اینترفیس‌های الکتریکال/ESD برای جایگزینی عملگر ولوهای Heinzmann.
+Purpose
+Shows lines, valves, instrumentation, control loops and electrical/ESD interfaces for replacing the Heinzmann valve actuators.
 
-نمادگذاری و لایه‌بندی (مختصر)
-- استاندارد نماد: ISA-5.1
-- تگینگ نمونه: FCV-PR-101 (Primary)، FCV-MN-201 (Main)
-- رنگ/لایه: مطابق استاندارد کارفرما (به‌روزرسانی پس از دریافت)
+Symbols and layering (brief)
+- Symbol standard: ISA-5.1
+- Sample tagging: FCV-PR-101 (Primary), FCV-MN-201 (Main)
+- Color/layer: per the client standard (to be updated after receipt)
 
-نمودار P&ID (Mermaid — شماتیک ساده)
+P&ID Diagram (Mermaid — simple schematic)
 
 ```mermaid
 flowchart LR
@@ -167,42 +167,42 @@ flowchart LR
   SIS -.-> DO1
 ```
 
-حلقه‌های کنترلی (نمونه)
-- LIC/FIC-PR-101: کنترل فلو خط Primary برای کنترل سرعت/بار — خروجی به عملگر FCV-PR-101
-- LIC/FIC-MN-201: کنترل فلو خط Main — خروجی به عملگر FCV-MN-201
-- PT-001/002 برای Interlock و حفاظت‌های فشار
-- SDV/ESD-PR-001 و SDV/ESD-MN-001 فرمان‌پذیر از SIS (Trip → Close)
+Control loops (sample)
+- LIC/FIC-PR-101: Primary line flow control for speed/load control — output to actuator FCV-PR-101
+- LIC/FIC-MN-201: Main line flow control — output to actuator FCV-MN-201
+- PT-001/002 for Interlock and pressure protections
+- SDV/ESD-PR-001 and SDV/ESD-MN-001 commandable from the SIS (Trip → Close)
 
-فلسفه ایمنی (پیش‌نویس)
-- حالت ایمن: Fail Close برای FCVها و SDVها
-- SIF نمونه: High-High Pressure at Header → Trip SDVها و فرمان Close FCVها (SIL2 هدف)
-- تست‌پذیری ادواری (Proof Test) و بای‌پس امن با مجوز بهره‌بردار
+Safety philosophy (draft)
+- Safe state: Fail Close for FCVs and SDVs
+- Sample SIF: High-High Pressure at Header → Trip the SDVs and Close command to the FCVs (SIL2 target)
+- Periodic testability (Proof Test) and a safe bypass with operator permit
 
-اینترفیس‌های الکتریکال (خلاصه)
-- تغذیه عملگرها: 24 VDC/110 VAC/400 VAC (طبق انتخاب عملگر) — با گواهی Ex و IP مناسب
-- سیگنال‌ها: آنالوگ 4–20 mA یا Fieldbus (HART/Profibus/Profinet) طبق PLC موجود
-- کابلینگ: شیلددار/زوج‌تابیده، زمین‌مرجع، JB/Marshall در Zone مناسب، گلند Ex
+Electrical interfaces (summary)
+- Actuator power supply: 24 VDC/110 VAC/400 VAC (per actuator selection) — with Ex certification and suitable IP
+- Signals: analog 4–20 mA or Fieldbus (HART/Profibus/Profinet) per the existing PLC
+- Cabling: shielded/twisted pair, reference ground, JB/Marshall in a suitable Zone, Ex gland
 
-فهرست تگ‌های نمونه (Partial Tag List)
-- FCV-PR-101، FCV-MN-201 — کنترل ولو + Actuator (Ex)
-- FT-PR-010، FT-MN-020 — فلو ترانسمیتر
-- PT-001 (Upstream)، PT-002 (Header) — پرشر ترانسمیتر
-- SDV/ESD-PR-001، SDV/ESD-MN-001 — ولو قطع اضطراری
-- PSV-PR-001، PSV-MN-001 — ولو اطمینان (در صورت نیاز)
+Partial Tag List
+- FCV-PR-101, FCV-MN-201 — control valve + Actuator (Ex)
+- FT-PR-010, FT-MN-020 — flow transmitter
+- PT-001 (Upstream), PT-002 (Header) — pressure transmitter
+- SDV/ESD-PR-001, SDV/ESD-MN-001 — emergency shutdown valve
+- PSV-PR-001, PSV-MN-001 — relief valve (if needed)
 
-I/O List (پیش‌نویس)
-- آنالوگ ورودی: PT-001، PT-002، FT-PR-010، FT-MN-020
-- آنالوگ خروجی: FCV-PR-101 (Position/Command)، FCV-MN-201 (Position/Command)
-- دیجیتال خروجی: SDV/ESD-PR-001 (Close/Open)، SDV/ESD-MN-001 (Close/Open)
-- دیجیتال ورودی: Limit Switches، Trip Status، ESD Status
+I/O List (draft)
+- Analog input: PT-001, PT-002, FT-PR-010, FT-MN-020
+- Analog output: FCV-PR-101 (Position/Command), FCV-MN-201 (Position/Command)
+- Digital output: SDV/ESD-PR-001 (Close/Open), SDV/ESD-MN-001 (Close/Open)
+- Digital input: Limit Switches, Trip Status, ESD Status
 
-یادداشت‌ها
-- نمادها و تگ‌ها نمونه‌اند و با استاندارد کارفرما/سایت تطبیق داده خواهند شد.
-- جایگذاری PSVها، هات-بای‌پس و اندازه سایزینگ لاین‌ها پس از دریافت دیتای فرآیندی نهایی می‌شود.
+Notes
+- Symbols and tags are samples and will be matched to the client/site standard.
+- The placement of PSVs, hot bypass and line sizing will be finalized after receiving the final process data.
 
 
-ریشه پروژه
-ساختار کلی پوشه‌ها و فایل‌ها:
+Project root
+Overall structure of folders and files:
 
 ```
 pfd-pid/
@@ -212,34 +212,34 @@ pfd-pid/
 ├─ tools/
 │  ├─ requirements.txt
 │  └─ generate_dxf.py
-└─ cad/                ← پس از اجرای اسکریپت ساخته می‌شود
-   ├─ PFD_SGT600_Fuel_Control.dxf   (تولید می‌شود)
-   └─ PID_SGT600_Fuel_Control.dxf   (تولید می‌شود)
+└─ cad/                ← created after running the script
+   ├─ PFD_SGT600_Fuel_Control.dxf   (generated)
+   └─ PID_SGT600_Fuel_Control.dxf   (generated)
 ```
 
-تولید فایل‌های AutoCAD (DXF)
-برای دریافت خروجی قابل باز شدن در AutoCAD/LibreCAD، اسکریپت DXF آماده شده است:
+Generating AutoCAD files (DXF)
+For output that can be opened in AutoCAD/LibreCAD, a DXF script has been prepared:
 
-۱) نصب پیش‌نیاز
+1) Install the prerequisite
 ```powershell
 python -m venv .venv
 .\\.venv\\Scripts\\Activate.ps1
 pip install -r tools\\requirements.txt
 ```
 
-۲) تولید DXFها
+2) Generate the DXFs
 ```powershell
 python tools\\generate_dxf.py
 ```
 
-۳) مسیر خروجی
-- فایل‌ها در پوشه `cad\\` ایجاد می‌شوند:
+3) Output path
+- Files are created in the `cad\\` folder:
   - `cad\\PFD_SGT600_Fuel_Control.dxf`
   - `cad\\PID_SGT600_Fuel_Control.dxf`
 
-نکات
-- این DXFها شماتیک مهندسی برای شروع کار اتوکد هستند (بلوک‌ها/لایه‌ها ساده). می‌توانیم نمادهای استاندارد ISA، لایه‌بندی، بلاک‌های ابزار و Title Block را مطابق استاندارد کارفرما سفارشی کنیم.
-- در صورت نیاز به فرمت DWG، می‌توانید DXF را در AutoCAD با Save As به DWG تبدیل کنید.
+Notes
+- These DXFs are engineering schematics for starting AutoCAD work (simple blocks/layers). We can customize the standard ISA symbols, layering, instrument blocks and Title Block per the client's standard.
+- If the DWG format is needed, you can convert the DXF to DWG in AutoCAD with Save As.
 
 
 

@@ -1,15 +1,15 @@
-عنوان: P&ID — مدار سوخت و عملگر کنترل ولو (Siemens SGT600/IGT25)
+Title: P&ID — Fuel Circuit and Control Valve Actuator (Siemens SGT600/IGT25)
 
-دامنه
-- نمایش لاین‌ها، ولوها، ابزار دقیق، حلقه‌های کنترلی، اینترفیس‌های الکتریکال/ESD و تگینگ نمونه برای جایگزینی/پیاده‌سازی عملگر کنترل ولو خطوط Primary و Main و ادغام به هدر مشترک توربین.
+Scope
+- Shows lines, valves, instrumentation, control loops, electrical/ESD interfaces and sample tagging for replacing/implementing the control valve actuator of the Primary and Main lines and merging into the turbine common header.
 
-استانداردها و نمادگذاری
-- ISA-5.1 برای نمادگذاری ابزار دقیق و تگینگ
-- IEC 61511/61508 برای SIS/SIL (هدف SIL2 برای SIFهای منتخب)
-- IEC 60079 برای حفاظت انفجاری (Ex) تجهیزات
-- API 6D/598 برای تست ولوها (در صورت کاربرد)
+Standards and symbols
+- ISA-5.1 for instrumentation symbols and tagging
+- IEC 61511/61508 for SIS/SIL (SIL2 target for selected SIFs)
+- IEC 60079 for explosion protection (Ex) of equipment
+- API 6D/598 for valve testing (where applicable)
 
-نمودار P&ID (Mermaid — شماتیک ساده)
+P&ID Diagram (Mermaid — simple schematic)
 
 ```mermaid
 flowchart LR
@@ -65,7 +65,7 @@ flowchart LR
   SIS -.-> DO1
 ```
 
-نمودار P&ID (Mermaid — جزئیات عملگر، SOV و لیمیت‌سوئیچ‌ها)
+P&ID Diagram (Mermaid — actuator, SOV and limit switch details)
 
 ```mermaid
 flowchart LR
@@ -93,91 +93,91 @@ flowchart LR
   FB_MN2 -.-> PLC
 ```
 
-تگینگ نمونه
-- FCV-PR-101، FCV-MN-201 — کنترل ولو + Actuator (Ex) برای خطوط Primary/Main
-- FT-PR-010، FT-MN-020 — فلوترانسمیتر هر خط (روش اندازه‌گیری مطابق انتخاب: اوریفیس، کوریولیس، آلتراسونیک)
-- PT-001 (Upstream/KO Outlet)، PT-002 (Header) — پرشر ترانسمیترها
-- SDV/ESD-PR-001، SDV/ESD-MN-001 — ولو قطع اضطراری فرمان‌پذیر از SIS
-- PSV-PR-001، PSV-MN-001 — ولو اطمینان در صورت نیاز (مطابق مطالعات Overpressure)
+Sample tagging
+- FCV-PR-101, FCV-MN-201 — control valve + Actuator (Ex) for the Primary/Main lines
+- FT-PR-010, FT-MN-020 — flow transmitter of each line (measurement method per selection: orifice, Coriolis, ultrasonic)
+- PT-001 (Upstream/KO Outlet), PT-002 (Header) — pressure transmitters
+- SDV/ESD-PR-001, SDV/ESD-MN-001 — emergency shutdown valve commandable from the SIS
+- PSV-PR-001, PSV-MN-001 — relief valve if needed (per Overpressure studies)
 
-حلقه‌های کنترلی (نمونه)
-- FIC-PR-101: کنترل فلو خط Primary با خروجی AO به FCV-PR-101 (سیگنال 4–20 mA یا Fieldbus)
-- FIC-MN-201: کنترل فلو خط Main با خروجی AO به FCV-MN-201
-- PT-001/002 جهت Interlock فشار، ارسال به PLC و منطق‌های حفاظتی
-- SDVها فرمان‌پذیر از SIS؛ در شرایط Trip → Close
+Control loops (sample)
+- FIC-PR-101: Primary line flow control with AO output to FCV-PR-101 (4–20 mA signal or Fieldbus)
+- FIC-MN-201: Main line flow control with AO output to FCV-MN-201
+- PT-001/002 for pressure Interlock, sent to the PLC and protection logic
+- SDVs commandable from the SIS; on Trip → Close
 
-فلسفه ایمنی و SIF (پیشنهادی، هدف SIL2)
-- SIF-1: Header High-High Pressure (PT-002 HH) → Close SDVها (PR/MN) و فرمان Close به FCVها
-- SIF-2: Upstream High-High Pressure (PT-001 HH) → همانند بالا (در صورت تایید HAZOP/LOPA)
-- حالت ایمن: Fail Close برای FCV و SDV
-- Proof Test: برنامه آزمون‌پذیری ادواری با بای‌پس امن و مجوز بهره‌بردار
+Safety philosophy and SIF (suggested, SIL2 target)
+- SIF-1: Header High-High Pressure (PT-002 HH) → Close the SDVs (PR/MN) and Close command to the FCVs
+- SIF-2: Upstream High-High Pressure (PT-001 HH) → same as above (if confirmed by HAZOP/LOPA)
+- Safe state: Fail Close for FCV and SDV
+- Proof Test: periodic testability program with a safe bypass and operator permit
 
-اینترفیس‌های الکتریکال (خلاصه)
-- تغذیه عملگرها: 24 VDC/110 VAC/400 VAC (طبق انتخاب عملگر) با گواهی Ex و IP مناسب
-- سیگنال‌ها: آنالوگ 4–20 mA یا Fieldbus (HART/Profibus/Profinet) مطابق PLC/TGC موجود
-- کابلینگ: زوج‌تابیده/شیلددار، زمین‌مرجع، JB/Marshall در Zone مناسب، گلند Ex
+Electrical interfaces (summary)
+- Actuator power supply: 24 VDC/110 VAC/400 VAC (per actuator selection) with Ex certification and suitable IP
+- Signals: analog 4–20 mA or Fieldbus (HART/Profibus/Profinet) per the existing PLC/TGC
+- Cabling: twisted/shielded, reference ground, JB/Marshall in a suitable Zone, Ex gland
 
-I/O List (پیش‌نویس برای ادغام با PLC/TGC)
-- Analog In (AI): PT-001، PT-002، FT-PR-010، FT-MN-020
-- Analog Out (AO): FCV-PR-101 (Command/Position)، FCV-MN-201 (Command/Position)
-- Digital Out (DO): SDV/ESD-PR-001 (Close/Open)، SDV/ESD-MN-001 (Close/Open)
-- Digital In (DI): Limit Switches (Open/Close)، Trip Status، ESD Status، Faults
+I/O List (draft for integration with PLC/TGC)
+- Analog In (AI): PT-001, PT-002, FT-PR-010, FT-MN-020
+- Analog Out (AO): FCV-PR-101 (Command/Position), FCV-MN-201 (Command/Position)
+- Digital Out (DO): SDV/ESD-PR-001 (Close/Open), SDV/ESD-MN-001 (Close/Open)
+- Digital In (DI): Limit Switches (Open/Close), Trip Status, ESD Status, Faults
 
-I/O تخصیص به PLC/SIS (پیشنهادی)
-- PLC-AI: PT-001، PT-002، FT-PR-010، FT-MN-020
-- PLC-AO: FCV-PR-101 CMD، FCV-MN-201 CMD
-- PLC-DI: LS-PR-OPEN، LS-PR-CLOSE، LS-MN-OPEN، LS-MN-CLOSE، Trip Status
-- SIS-DO: SDV-PR-001 CLOSE/OPEN، SDV-MN-001 CLOSE/OPEN، SOV-PR-1 TRIP، SOV-MN-1 TRIP
+I/O assignment to PLC/SIS (suggested)
+- PLC-AI: PT-001, PT-002, FT-PR-010, FT-MN-020
+- PLC-AO: FCV-PR-101 CMD, FCV-MN-201 CMD
+- PLC-DI: LS-PR-OPEN, LS-PR-CLOSE, LS-MN-OPEN, LS-MN-CLOSE, Trip Status
+- SIS-DO: SDV-PR-001 CLOSE/OPEN, SDV-MN-001 CLOSE/OPEN, SOV-PR-1 TRIP, SOV-MN-1 TRIP
 
-کابلینگ و مارshalling (پیش‌نویس)
-- JB-Zone: Junction Box Exe در Zone مناسب برای هر خط
-- کابل ابزار: زوج‌تابیده شیلددار 1.5 mm² برای آنالوگ؛ 1.5–2.5 mm² برای دیجیتال/فرمان
-- گلند: Exe/Exd مطابق تجهیز
-- مارشالینگ: تخصیص ترمینال TB-### در مارشال پانل؛ شماره‌گذاری همروند با I/O
+Cabling and marshalling (draft)
+- JB-Zone: Exe Junction Box in a suitable Zone for each line
+- Instrument cable: shielded twisted pair 1.5 mm² for analog; 1.5–2.5 mm² for digital/command
+- Gland: Exe/Exd per the equipment
+- Marshalling: terminal TB-### allocation in the marshalling panel; numbering consistent with I/O
 
 Line List (Draft)
-- L-PR-001: Primary Fuel Line — کلاس فلنج ASME (Site Data)، سایز NPS (Site Data)
-- L-MN-001: Main Fuel Line — کلاس فلنج ASME (Site Data)، سایز NPS (Site Data)
-- L-HDR-001: Mixing Header به GT — کلاس و سایز (Site Data)
+- L-PR-001: Primary Fuel Line — ASME flange class (Site Data), NPS size (Site Data)
+- L-MN-001: Main Fuel Line — ASME flange class (Site Data), NPS size (Site Data)
+- L-HDR-001: Mixing Header to GT — class and size (Site Data)
 
 Valve Data (Placeholders)
-- FCV-PR-101: Size/Rating، Body/Trim، Characteristic (Linear/Equal%)، Leakage Class، Cv
-- FCV-MN-201: Size/Rating، Body/Trim، Characteristic، Leakage Class، Cv
-- SDV-PR-001 / SDV-MN-001: نوع (Ball/Plug/Gate)، Actuation (Solenoid/Pneumatic)، Fail Action
-- PSV-PR-001 / PSV-MN-001: Set Pressure، Orifice، استاندارد API
+- FCV-PR-101: Size/Rating, Body/Trim, Characteristic (Linear/Equal%), Leakage Class, Cv
+- FCV-MN-201: Size/Rating, Body/Trim, Characteristic, Leakage Class, Cv
+- SDV-PR-001 / SDV-MN-001: type (Ball/Plug/Gate), Actuation (Solenoid/Pneumatic), Fail Action
+- PSV-PR-001 / PSV-MN-001: Set Pressure, Orifice, API standard
 
-Setpoints و Limits (Placeholders)
-- PT-002 HH: Header Pressure Trip → فرمان Close SDVها و SOV Trip
-- PT-001 HH: Upstream Protection (در صورت تایید) → فرمان Close
-- Min Flow Limits: برای پایداری احتراق/حفاظت عملگرها
+Setpoints and Limits (Placeholders)
+- PT-002 HH: Header Pressure Trip → Close command to the SDVs and SOV Trip
+- PT-001 HH: Upstream Protection (if confirmed) → Close command
+- Min Flow Limits: for combustion stability/actuator protection
 
-Cause & Effect (خلاصه)
-- Cause: PT-002 = HH → Effect: SDV-PR-001 Close، SDV-MN-001 Close، SOV-PR/MN Trip، GT Fuel Shut
-- Cause: ESD Pushbutton → Effect: همانند بالا با لاجیک SIS
-- Cause: LS Mismatch (Valve command Close ولی Feedback Open) → Effect: Alarm + Action per philosophy
+Cause & Effect (summary)
+- Cause: PT-002 = HH → Effect: SDV-PR-001 Close, SDV-MN-001 Close, SOV-PR/MN Trip, GT Fuel Shut
+- Cause: ESD Pushbutton → Effect: same as above with SIS logic
+- Cause: LS Mismatch (valve command Close but feedback Open) → Effect: Alarm + Action per philosophy
 
-Logic Narrative (خلاصه)
-- فرمان AO از PLC به Positioner برای FCVها، با Feedback Position/Status به PLC
-- فرمان‌های Trip/Close برای SDVها و SOVها از SIS (اولویت ایمنی)
-- Interlockها بر اساس PT-001/002 و شرایط GT؛ Override/Bypass مطابق مجوز بهره‌بردار و روش تست
+Logic Narrative (summary)
+- AO command from the PLC to the Positioner for the FCVs, with Position/Status feedback to the PLC
+- Trip/Close commands for the SDVs and SOVs from the SIS (safety priority)
+- Interlocks based on PT-001/002 and GT conditions; Override/Bypass per operator permit and test procedure
 
-حوزه خطر (Hazardous Area)
-- تجهیزات ابزاردقیق و عملگرها با گواهی Ex (ATEX/IECEx)، دسته‌بندی Zone 1/2 مطابق طبقه‌بندی سایت
-- رعایت زمین‌مرجع و حفاظت در برابر صاعقه طبق استاندارد سایت
+Hazardous Area
+- Instrumentation and actuators with Ex certification (ATEX/IECEx), Zone 1/2 classification per site classification
+- Compliance with reference grounding and lightning protection per the site standard
 
-داده‌های تکمیلی موردنیاز (برای نهایی‌سازی)
-- Cv محاسباتی هر FCV و انتخاب Trim/Characteristic (Linear/Equal%)
-- سرعت عملگر، گشتاور/نیرو، زمان بسته/باز شدن و تست‌های On/Off/Partial Stroke (در صورت نیاز)
-- روش اندازه‌گیری فلو و کلاس دقت ابزار (معیار کالیبراسیون/Ex)
-- سایزینگ لاین‌ها، کلاس فلنج‌ها، متریال، و الزامات تست/باگاه
-- منطق‌های Interlock/Shutdown با اشاره به Cause & Effect و نتایج HAZOP/LOPA
+Supplementary data required (for finalization)
+- Calculated Cv of each FCV and selection of Trim/Characteristic (Linear/Equal%)
+- Actuator speed, torque/force, closing/opening time and On/Off/Partial Stroke tests (if needed)
+- Flow measurement method and instrument accuracy class (calibration/Ex criteria)
+- Line sizing, flange classes, materials, and testing/inspection requirements
+- Interlock/Shutdown logic with reference to Cause & Effect and HAZOP/LOPA results
 
-یادداشت‌ها
-- نمادها و تگ‌ها نمونه‌اند و براساس استاندارد کارفرما/سایت به‌روزرسانی خواهند شد.
-- جایگذاری PSVها، هات-بای‌پس و سایزینگ نهایی پس از دریافت دیتای فرآیندی نهایی تثبیت می‌شود.
+Notes
+- Symbols and tags are samples and will be updated based on the client/site standard.
+- The placement of PSVs, hot bypass and final sizing will be finalized after receiving the final process data.
 
-تغییرات نسخه
-- v0.2: افزودن دیاگرام جزئیات عملگر/Positioner/SOV/لیمیت‌سوئیچ‌ها، جداول I/O تخصیص، Line List، Valve Data، Setpoints، C&E خلاصه و Logic Narrative
-- v0.1: نسخه ساده اولیه
+Version history
+- v0.2: Added the actuator/Positioner/SOV/limit switch detail diagram, I/O assignment tables, Line List, Valve Data, Setpoints, C&E summary and Logic Narrative
+- v0.1: Simple initial version
 
 
